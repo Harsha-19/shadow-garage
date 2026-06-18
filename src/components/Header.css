@@ -1,0 +1,130 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  transition: all 0.4s ease;
+  padding: 24px 0;
+}
+
+.header-scrolled {
+  padding: 16px 0;
+  border-radius: 0;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  background: rgba(5, 5, 5, 0.85); /* Slightly darker glass for header */
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0;
+}
+
+.logo {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+  cursor: pointer;
+  display: flex;
+  gap: 6px;
+}
+
+.logo-shadow {
+  color: #FFFFFF;
+}
+
+.logo-garage {
+  color: #E50914;
+}
+
+.header-tagline {
+  font-size: 0.65rem;
+  letter-spacing: 3px;
+  color: #9CA3AF;
+  text-transform: uppercase;
+  font-weight: 600;
+  display: none; /* Hide on smaller screens */
+  margin-top: 2px;
+}
+
+@media (min-width: 1100px) {
+  .header-tagline {
+    display: block;
+  }
+}
+
+.nav-links {
+  display: flex;
+  gap: 28px;
+  align-items: center;
+}
+
+.nav-link {
+  font-size: 0.85rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #FFFFFF;
+  transition: color 0.3s ease;
+  position: relative;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  background-color: #E50914;
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover {
+  color: #E50914;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  margin-left: 48px; /* Adds breathing room from the nav links */
+}
+
+.btn-book {
+  background: #E50914;
+  padding: 10px 24px;
+  border-radius: 4px;
+  color: white;
+  transition: all 0.3s ease;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+}
+
+.btn-book:hover {
+  background: #ff1a26;
+  box-shadow: 0 4px 15px rgba(229, 9, 20, 0.4);
+}
+
+@media (max-width: 968px) {
+  .nav-links {
+    display: none;
+  }
+}

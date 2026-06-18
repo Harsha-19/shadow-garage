@@ -1,0 +1,168 @@
+.before-after-section {
+  padding: 100px 0;
+  background-color: var(--color-graphite);
+}
+
+.slider-container {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: 16px;
+  cursor: ew-resize;
+  user-select: none;
+  box-shadow: 0 30px 60px rgba(0,0,0,0.6);
+}
+
+.image-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+.image-after {
+  z-index: 1;
+}
+
+.image-before {
+  z-index: 0;
+}
+
+/* Ensure the image inside the after wrapper maintains its full original width visually */
+.image-after img {
+  width: auto;
+  min-width: 100%;
+  /* We use min-width: 100% relative to the slider-container, but since the wrapper has a dynamic width, 
+     we actually need to force the img to the container width. 
+     Wait, standard CSS approach for this: */
+  width: 900px; /* fallback */
+  max-width: none;
+}
+
+/* Better approach for responsive before/after image scaling inside dynamic width div */
+.image-wrapper img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: left;
+}
+.image-after img {
+  /* This ensures the 'after' image spans the exact width of the parent container, not the wrapper */
+  width: 100vw;
+  max-width: 900px;
+}
+
+/* Let's refine the image sizing */
+.slider-container .image-after img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: left;
+}
+
+/* Actually, the best way is to have both images have exact same dimensions and position absolute.
+   The wrapper controls the crop via overflow hidden. */
+.slider-container > .image-wrapper > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.image-after {
+  /* wrapper itself scales */
+}
+.image-after img {
+  width: 900px; /* needs to match container width to prevent stretching. We'll fix this properly with CSS object-position */
+}
+
+/* Let's use standard before-after CSS trick */
+.image-wrapper img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.image-after img {
+  width: 100vw;
+  max-width: 900px; /* same as container max-width */
+}
+/* For pure responsiveness without JS for image resizing, object-position works best if container ratio is fixed */
+
+
+.label {
+  position: absolute;
+  top: 24px;
+  padding: 8px 16px;
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  border-radius: 4px;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  z-index: 2;
+  border: 1px solid var(--glass-border);
+}
+
+.label-before {
+  right: 24px;
+}
+
+.label-after {
+  left: 24px;
+}
+
+.slider-handle {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background-color: var(--color-red);
+  z-index: 3;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 10px var(--color-red-glow);
+}
+
+.slider-handle-circle {
+  width: 40px;
+  height: 40px;
+  background-color: var(--color-black);
+  border: 2px solid var(--color-red);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  box-shadow: 0 0 20px rgba(0,0,0,0.8);
+  gap: 2px;
+}
+
+.slider-handle-circle svg {
+  width: 14px;
+  height: 14px;
+}
+
+@media (max-width: 948px) {
+  .image-after img {
+     width: calc(100vw - 48px); /* Container padding */
+  }
+}
